@@ -50,7 +50,9 @@ router.get('/activities', (req, res, next) => {
 // CORE CHALLENGE 3 -
 router.post('/add-activity', (req, res, next) => {
     const body = [];
+    console.log("Post activated.");
     req.on('data', (chunk) => {
+        console.log(chunk);
         body.push(chunk);
     });
     return req.on('end', () => {
@@ -59,6 +61,7 @@ router.post('/add-activity', (req, res, next) => {
         // Console log seen in terminal, may be encoded, but isn't important for now
         console.log(newActivity);
         activities.push(newActivity);
+        console.log("Got the request.");
 
         // Remain on './activities' url.
         res.writeHead(302, {'Location': 'activities'});

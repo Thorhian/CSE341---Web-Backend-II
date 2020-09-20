@@ -1,0 +1,22 @@
+.bodyMain {
+    background-color: dodgerblue;
+}
+
+body {
+    color: whitesmoke;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 12%;
+    padding-right: 10%;
+    padding-top: 5%;
+    margin: auto;
+}
+
+.centerInput {
+    text-align: center;
+    align-content: center;
+
+}
+
+hr {
+    border: 2px solid #a2a620;
+}
