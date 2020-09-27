@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/proveAssigns.css" />
+  </head>
+  <body class="bodyMain">
+    <header class="proveAssigns__header">
+      <nav class="proveAssigns__nav">
+        <div>
+          <h3> Prove 02: Primitive Book Database </h3>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="grid">
+        <form action="/prove02/add_book" method="POST">
+          <div class="card">
+            <h2> Insert a New Book Here: </h2>
+            <label for="bookTitle"> Book Title </label>
+            <input id="bookTitle" type="text" name="bookName">
+            <br>
+            <label for="bookSummary"> Book Summary </label>
+            <textarea id="bookSummary" name="bookSummary">
+            </textarea>
+            <button type="submit"> Submit </button>
+          </div>
+        </form>
+        <% if (displayDelete) { %>
+        <div class="card">
+          <h2> Delete Book Here: </h2>
+          <form action="/prove02/remove_book" method="POST">
+            <label for="bookToDelete"> Book Title </label>
+            <input id="bookToDelete" type="text" name="bookName">
+            <button type="submit"> Submit </button>
+          </form>
+        </div>
+        <% } %>
+        <% for (i = 0; i < bookNames.length; i++) { %>
+
+           <div class="card">
+             <h2> <%= bookNames[i] %> </h2>
+             <br>
+             <p> <%= bookSums[i] %> </p>
+           </div>
+
+           <% } %>
+      </div>
+    </main>
+  </body>
+</html>
