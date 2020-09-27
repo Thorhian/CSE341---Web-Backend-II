@@ -9,13 +9,37 @@
 <div class="jumbotron text-center">
   <div class="container">
     <h1><%= title %></h1>
-    <p>This is the placeholder for Team Activity 02</p>
   </div>
 </div>
 <div class="container">
-  
+<h2> Add Users: </h2>
+  <form action="/ta02/addUser" method="POST">
+    <input type="text" name="newUser">
+    <button type="submit" name="submitUserName">Submit</button>
+  </form>
+
+  <% if (users.length > 0) { %>
+  <ul>
+  <% for (i = 0; i < users.length; i++) { %>
+  <li> <%= users[i] %> </li>
+  <% } %>
+  </ul>
+  <% } else { %>
+  <h1> No users found... </h1>
+  <% } %>
+
 </div>
 
+<div class="container">
+  <h2> Delete Users: </h2>
+  <form action="/ta02/removeUser" method="POST">
+    <input type="text" name="dUserName">
+    <button type="submit">Submit</button>
+  </form>
+  <% if (delUser == true) { %>
+  <h3> Username could not be found. </h3>
+  <% } %>
+</div>
 
 </body>
 </html>

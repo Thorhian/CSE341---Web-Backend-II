@@ -12,11 +12,14 @@
  *******************************************************************************/
 // Our initial setup (package requires, port number setup)
 const express = require('express');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const path = require('path');
 const PORT = process.env.PORT || 5000 // So we can run on heroku || (OR) localhost:5000
 
 const app = express();
+
 
 // Route setup. You can implement more in the future!
 const ta01Routes = require('./routes/ta01');
@@ -24,10 +27,13 @@ const ta02Routes = require('./routes/ta02');
 const ta03Routes = require('./routes/ta03'); 
 const ta04Routes = require('./routes/ta04');
 const prove01Routes = require('./routes/prove01');
+const prove02Routes = require('./routes/prove02');
 
 app.use(express.static(path.join(__dirname, 'public')))
    .set('views', path.join(__dirname, 'views'))
    .set('view engine', 'ejs')
+   .use(cookieParser())
+   .use(session({secret: "It's a secret I guess?"}))
    // For view engine as Pug
    //.set('view engine', 'pug') // For view engine as PUG. 
    // For view engine as hbs (Handlebars)
