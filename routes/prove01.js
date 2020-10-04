@@ -1,15 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
+const prove01Cont = require('../controllers/prove01');
 
-router.get('/', (req, res, next) => {
-    res.render('pages/prove01');
-    return res.end();
-});
+router.get('/', prove01Cont.get);
 
-router.post('/input', (req, res, next) => {
-    const userData = req.body.userInput;
-    res.render('pages/prove01Input', {userInput: userData});
-    return res.end()
-});
+router.post('/input', prove01Cont.post);
 
 module.exports = router;
