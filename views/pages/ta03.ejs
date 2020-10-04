@@ -9,10 +9,25 @@
 <div class="jumbotron text-center">
   <div class="container">
     <h1><%= title %></h1>
-    <p>This is the placeholder for Team Activity 03</p>
+
   </div>
 </div>
 <div class="container">
+
+    <ul>
+      <% for (i = 0; i < itemsData.length; i++) { %>
+         <li>
+           <h3> <%= itemsData[i].name %> </h3>
+           <h5> $<%= itemsData[i].price %> </h5>
+           <img src="<%= itemsData[i].imageUrl %>">
+           <p> <%= itemsData[i].description %> </p>
+           <p> Tags: <% for (j = 0; j < itemsData[i].tags.length; j++) { %>
+             <%= itemsData[i].tags[j] %>
+             <% } %>
+           </p>
+         </li>
+      <% } %>
+    </ul>
   
 </div>
 
