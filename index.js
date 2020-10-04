@@ -28,6 +28,7 @@ const ta03Routes = require('./routes/ta03');
 const ta04Routes = require('./routes/ta04');
 const prove01Routes = require('./routes/prove01');
 const prove02Routes = require('./routes/prove02');
+const carsRoutes = require('./routes/carApp/index')
 
 app.use(express.static(path.join(__dirname, 'public')))
    .set('views', path.join(__dirname, 'views'))
