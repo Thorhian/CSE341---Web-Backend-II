@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Gaben: Team Fortress 2",
+        "price": 2.99,
+        "description": "The Ultimate Guide to learn how to not hype up Half-Life 3.",
+        "imageUrl": "",
+        "tags": [
+            "The Ultimate Troll", "Half-Life", "Valve"
+        ]
+    },
+    {
+        "name": "Oathbringer",
+        "price": 24.99,
+        "description": "Live Before Death, Strength Before Weakness, Journey Before Destination.",
+        "imageUrl": "",
+        "tags": [
+            "Stormlight", "Archives", "Brandon", "Sanderson", "Radiant"
+        ]
+    }
+]
