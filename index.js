@@ -28,6 +28,8 @@ const ta03Routes = require('./routes/teamActivities/ta03');
 const ta04Routes = require('./routes/teamActivities/ta04');
 const prove01Routes = require('./routes/prove01');
 const prove02Routes = require('./routes/prove02');
+const shopRoutes = require('./routes/shop');
+const shopAdminRoutes = require('./routes/admin');
 
 app.use(express.static(path.join(__dirname, 'public')))
    .set('views', path.join(__dirname, 'views'))
@@ -46,6 +48,8 @@ app.use(express.static(path.join(__dirname, 'public')))
    .use('/ta04', ta04Routes)
    .use('/prove01', prove01Routes)
    .use('/prove02', prove02Routes)
+   .use('/shop', shopRoutes)
+   .use('/shopAdmin', shopAdminRoutes)
    .get('/', (req, res, next) => {
      // This is the primary index, always handled last. 
      res.render('pages/index', {title: 'Welcome to my CSE341 repo', path: '/'});
