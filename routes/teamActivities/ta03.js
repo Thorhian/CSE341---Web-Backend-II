@@ -1,7 +1,7 @@
 //TA03 PLACEHOLDER
 const express = require('express');
 const router = express.Router();
-const Items = require('../models/items')
+const Items = require('../../models/items')
 
 router.get('/', (req, res, next) => {
     const items = new Items();
