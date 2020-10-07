@@ -3,6 +3,18 @@ const path = require('path');
 
 const Cart = require('./cart');
 
+const p = path.join(__dirname, 'products.json');
+
+const getProductsFromFile = cb => {
+  fs.readFile(p, (err, fileContent) => {
+    if (err) {
+      cb([]);
+    } else {
+      cb(JSON.parse(fileContent));
+    }
+  });
+};
+
 module.exports = class Product {
     constructor(id, title, imageUrl, description, price) {
         this.id = id;

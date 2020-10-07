@@ -3,7 +3,7 @@ const Cart = require('../models/cart');
 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll(products => {
-    res.render('shop/product-list', {
+    res.render('pages/shop/product-list', {
       prods: products,
       pageTitle: 'All Products',
       path: '/products'
@@ -14,7 +14,7 @@ exports.getProducts = (req, res, next) => {
 exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId;
   Product.findById(prodId, product => {
-    res.render('shop/product-detail', {
+    res.render('pages/shop/product-detail', {
       product: product,
       pageTitle: product.title,
       path: '/products'
@@ -24,7 +24,7 @@ exports.getProduct = (req, res, next) => {
 
 exports.getIndex = (req, res, next) => {
   Product.fetchAll(products => {
-    res.render('shop/index', {
+    res.render('pages/shop/index', {
       prods: products,
       pageTitle: 'Shop',
       path: '/'
@@ -44,7 +44,7 @@ exports.getCart = (req, res, next) => {
           cartProducts.push({ productData: product, qty: cartProductData.qty });
         }
       }
-      res.render('shop/cart', {
+      res.render('pages/shop/cart', {
         path: '/cart',
         pageTitle: 'Your Cart',
         products: cartProducts
@@ -70,14 +70,14 @@ exports.postCartDeleteProduct = (req, res, next) => {
 };
 
 exports.getOrders = (req, res, next) => {
-  res.render('shop/orders', {
+  res.render('pages/shop/orders', {
     path: '/orders',
     pageTitle: 'Your Orders'
   });
 };
 
 exports.getCheckout = (req, res, next) => {
-  res.render('shop/checkout', {
+  res.render('pages/shop/checkout', {
     path: '/checkout',
     pageTitle: 'Checkout'
   });
