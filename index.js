@@ -16,10 +16,17 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const path = require('path');
+const cors = require('cors');
+
+const mongoConnect = require('./util/database')
 const PORT = process.env.PORT || 5000 // So we can run on heroku || (OR) localhost:5000
 
 const app = express();
 
+const corsOptions = {
+    origin: "https://secret-sierra-66724.heroku.com/",
+    optionsSuccessStatus: 200
+};
 
 // Route setup. You can implement more in the future!
 const ta01Routes = require('./routes/teamActivities/ta01');
@@ -31,31 +38,34 @@ const prove02Routes = require('./routes/prove02');
 const shopRoutes = require('./routes/shop');
 const shopAdminRoutes = require('./routes/admin');
 
-app.use(express.static(path.join(__dirname, 'public')))
-   .set('views', path.join(__dirname, 'views'))
-   .set('view engine', 'ejs')
-   .use(cookieParser())
-   .use(session({secret: "It's a secret I guess?"}))
+mongoConnect.mongoConnect(client => {
+   app.use(express.static(path.join(__dirname, 'public')))
+      .set('views', path.join(__dirname, 'views'))
+      .set('view engine', 'ejs')
+      .use(cookieParser())
+      .use(session({secret: "It's a secret I guess?"}))
    // For view engine as Pug
-   //.set('view engine', 'pug') // For view engine as PUG. 
+   //.set('view engine', 'pug') // For view engine as PUG.
    // For view engine as hbs (Handlebars)
    //.engine('hbs', expressHbs({layoutsDir: 'views/layouts/', defaultLayout: 'main-layout', extname: 'hbs'})) // For handlebars
    //.set('view engine', 'hbs')
-   .use(bodyParser({extended: false})) // For parsing the body of a POST
-   .use('/ta01', ta01Routes)
-   .use('/ta02', ta02Routes) 
-   .use('/ta03', ta03Routes) 
-   .use('/ta04', ta04Routes)
-   .use('/prove01', prove01Routes)
-   .use('/prove02', prove02Routes)
-   .use('/shop', shopRoutes)
-   .use('/admin', shopAdminRoutes)
-   .get('/', (req, res, next) => {
-     // This is the primary index, always handled last. 
-     res.render('pages/index', {title: 'Welcome to my CSE341 repo', path: '/'});
-    })
-   .use((req, res, next) => {
-     // 404 page
-     res.render('pages/404', {title: '404 - Page Not Found', path: req.url})
-   })
-   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+      .use(bodyParser({extended: false})) // For parsing the body of a POST
+      .use(cors(corsOptions))
+      .use('/ta01', ta01Routes)
+      .use('/ta02', ta02Routes)
+      .use('/ta03', ta03Routes)
+      .use('/ta04', ta04Routes)
+      .use('/prove01', prove01Routes)
+      .use('/prove02', prove02Routes)
+      .use('/shop', shopRoutes)
+      .use('/admin', shopAdminRoutes)
+      .get('/', (req, res, next) => {
+         // This is the primary index, always handled last.
+         res.render('pages/index', {title: 'Welcome to my CSE341 repo', path: '/'});
+      })
+      .use((req, res, next) => {
+         // 404 page
+         res.render('pages/404', {title: '404 - Page Not Found', path: req.url})
+      })
+      .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+})

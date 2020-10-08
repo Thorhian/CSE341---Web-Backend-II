@@ -8,6 +8,7 @@
     <main>
         <% if (prods.length > 0) { %>
             <div class="grid">
+                <% console.log(prods) %>
                 <% for (let product of prods) { %>
                     <article class="card product-item">
                         <header class="card__header">
@@ -17,12 +18,16 @@
                             <img src="<%= product.imageUrl %>"
                                 alt="<%= product.title %>">
                         </div>
+                        <p> <%= product._id%> </p>
                         <div class="card__content">
                             <h2 class="product__price">$<%= product.price %></h2>
                             <p class="product__description"><%= product.description %></p>
                         </div>
                         <div class="card__actions">
                             <%- include('../../includes/add-to-cart.ejs', {product: product}) %>
+                        </div>
+                        <div class="card__actions">
+                            <%- include('../../includes/productDetails.ejs', {product: product})%>
                         </div>
                     </article>
                 <% } %>
