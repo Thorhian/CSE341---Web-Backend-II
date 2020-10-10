@@ -45,7 +45,7 @@ exports.getEditProduct = (req, res, next) => {
       if (!product) {
         return res.redirect('/');
       }
-      res.render('admin/edit-product', {
+      res.render('pages/admin/edit-product', {
         pageTitle: 'Edit Product',
         path: '/admin/edit-product',
         editing: editMode,
@@ -81,7 +81,7 @@ exports.postEditProduct = (req, res, next) => {
 exports.getProducts = (req, res, next) => {
   Product.fetchAll()
     .then(products => {
-      res.render('admin/products', {
+      res.render('pages/admin/products', {
         prods: products,
         pageTitle: 'Admin Products',
         path: '/admin/products'
