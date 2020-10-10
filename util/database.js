@@ -4,9 +4,12 @@ const cors = require('cors');
 
 let _db;
 
-const corsOptions = {
-    origin: "https://secret-sierra-66724.heroku.com/",
-    optionsSuccessStatus: 200
+const options = {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    family: 4
 };
 
 const MONGODB_URL = process.env.MONGODB_URL;
