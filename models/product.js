@@ -1,18 +1,18 @@
 const mongodb = require('mongodb');
-const getDB = require('../util/database').getDB;
+const getDb = require('../util/database').getDb;
 
 class Product {
-    constructor(title, price, description, imageUrl, _id) {
+    constructor(title, price, description, imageUrl, _id, userId) {
         this.title = title;
         this.price = price;
         this.description = description;
         this.imageUrl = imageUrl;
-        this._id = id ? new mongodb.ObjectId(id) : null;
+        this._id = _id ? new mongodb.ObjectId(id) : null;
         this.userId = userId;
     }
 
     save() {
-        const db = getDB();
+        const db = getDb();
         let dbOp;
         if (this._id) {
             //Update the product
@@ -35,7 +35,7 @@ class Product {
     }
 
     static fetchAll() {
-        const db = getDB();
+        const db = getDb();
         return db.collection('products')
                  .find()
                  .toArray()
@@ -49,7 +49,7 @@ class Product {
     }
 
     static findById(prodId) {
-        const db = getDB();
+        const db = getDb();
         return db.collection('products')
                  .find({_id: new mongodb.ObjectId(prodId)})
                  .next()
@@ -63,7 +63,7 @@ class Product {
     }
 
     static deleteById(prodId) {
-        const db = getDB();
+        const db = getDb();
         return db
             .collection('products')
             .deleteOne({ _id: new mongodb.ObjectId(prodId) })

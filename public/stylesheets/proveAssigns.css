@@ -20,6 +20,18 @@ body {
     align-items: center;
 }
 
+.proveAssigns__nav__item-list {
+    list-style-type: none;
+}
+
+.proveAssigns__nav__item {
+    display: inline;
+}
+.proveAssigns__nav__item a {
+    display: inline;
+    text-decoration: none;
+}
+
 main {
     padding-left: 5rem;
     padding-right: 5rem;

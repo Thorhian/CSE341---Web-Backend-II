@@ -18,6 +18,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 
+const User = require('./models/user');
+
 const mongoConnect = require('./util/database')
 const PORT = process.env.PORT || 5000 // So we can run on heroku || (OR) localhost:5000
 
@@ -51,6 +53,15 @@ mongoConnect.mongoConnect(client => {
    //.set('view engine', 'hbs')
       .use(bodyParser({extended: false})) // For parsing the body of a POST
       .use(cors(corsOptions))
+      .use((req, res, next) => {
+         User.findById('5f82261093c7c002d1f1fcf1')
+             .then(user => {
+                req.user = new User(user.name, user.email, user.cart, user._id)
+                console.log(req.user);
+                next();
+             })
+             .catch(err => console.log(err));
+      })
       .use('/ta01', ta01Routes)
       .use('/ta02', ta02Routes)
       .use('/ta03', ta03Routes)
