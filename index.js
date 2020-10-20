@@ -18,6 +18,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 
+
 const User = require('./models/user');
 
 const mongoConnect = require('./util/database')
@@ -39,6 +40,7 @@ const prove01Routes = require('./routes/prove01');
 const prove02Routes = require('./routes/prove02');
 const shopRoutes = require('./routes/shop');
 const shopAdminRoutes = require('./routes/admin');
+const authRoutes = require('./routes/auth');
 
 mongoConnect.mongoConnect(client => {
    app.use(express.static(path.join(__dirname, 'public')))
@@ -53,14 +55,24 @@ mongoConnect.mongoConnect(client => {
    //.set('view engine', 'hbs')
       .use(bodyParser({extended: false})) // For parsing the body of a POST
       .use(cors(corsOptions))
+      //.use((req, res, next) => {
+         //User.findById('5f82261093c7c002d1f1fcf1')
+             //.then(user => {
+                //req.user = new User(user.name, user.email, user.cart, user._id)
+                //console.log(req.user);
+                //next();
+             //})
+             //.catch(err => console.log(err));
+      //})
       .use((req, res, next) => {
-         User.findById('5f82261093c7c002d1f1fcf1')
-             .then(user => {
-                req.user = new User(user.name, user.email, user.cart, user._id)
-                console.log(req.user);
-                next();
-             })
-             .catch(err => console.log(err));
+         console.log('Current User:');
+         console.log(req.session.user);
+         if(req.session.user) {
+            res.locals.isLoggedIn = true;
+         } else {
+            res.locals.isLoggedIn = false;
+         }
+         next();
       })
       .use('/ta01', ta01Routes)
       .use('/ta02', ta02Routes)
@@ -70,6 +82,7 @@ mongoConnect.mongoConnect(client => {
       .use('/prove02', prove02Routes)
       .use('/shop', shopRoutes)
       .use('/admin', shopAdminRoutes)
+      .use('/auth', authRoutes)
       .get('/', (req, res, next) => {
          // This is the primary index, always handled last.
          res.render('pages/index', {title: 'Welcome to my CSE341 repo', path: '/'});

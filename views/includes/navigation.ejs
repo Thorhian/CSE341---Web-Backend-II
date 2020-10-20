@@ -22,6 +22,18 @@
                 <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products
                 </a>
             </li>
+
+            <% if(!isLoggedIn) { %>
+            <li class="proveAssigns__nav__item">
+                <a class="<%= path === '/auth/login' ? 'active' : '' %>" href="/auth/login">Login
+                </a>
+            </li>
+            <% } else { %>
+            <li class="proveAssigns__nav__item">
+                <a href="/auth/logout">Login</a>
+            </li>
+            <% } %>
+
         </ul>
     </nav>
 </header>

@@ -1,0 +1,23 @@
+<%- include('../../includes/head.ejs') %>
+    <link rel="stylesheet" href="/stylesheets/proveAssigns.css">
+    </head>
+
+    <body>
+        <%- include('../../includes/navigation.ejs') %>
+        <main>
+            <div>
+                <form action="/auth/login" method="POST">
+                    <h4> Username: </h4>
+                    <input type="text" name="username">
+                    <h4> Password: </h4>
+                    <input type="password" name="password"><br>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+
+            <div>
+                <a href="/auth/createUser">Create New User</a>
+            </div>
+
+        </main>
+        <%- include('../../includes/end.ejs') %>
