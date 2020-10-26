@@ -19,7 +19,7 @@ exports.postAddProduct = (req, res, next) => {
     description,
     imageUrl,
     null,
-    req.user._id
+    req.session.user._id
   );
   product
     .save()

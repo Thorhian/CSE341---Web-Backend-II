@@ -17,7 +17,9 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
+const dotenv = require('dotenv');
 
+dotenv.config();
 
 const User = require('./models/user');
 
@@ -65,8 +67,6 @@ mongoConnect.mongoConnect(client => {
              //.catch(err => console.log(err));
       //})
       .use((req, res, next) => {
-         console.log('Current User:');
-         console.log(req.session.user);
          if(req.session.user) {
             res.locals.isLoggedIn = true;
          } else {

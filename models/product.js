@@ -7,8 +7,8 @@ class Product {
         this.price = price;
         this.description = description;
         this.imageUrl = imageUrl;
-        this._id = _id ? new mongodb.ObjectId(id) : null;
-        this.userId = userId;
+        this._id = _id ? new mongodb.ObjectId(_id) : null;
+        this.userId = userId ? new mongodb.ObjectId(userId) : null
     }
 
     save() {
@@ -40,7 +40,6 @@ class Product {
                  .find()
                  .toArray()
                  .then(products => {
-                     console.log(products);
                      return products;
                  })
                  .catch(err => {
@@ -54,7 +53,6 @@ class Product {
                  .find({_id: new mongodb.ObjectId(prodId)})
                  .next()
                  .then(product => {
-                     console.log(product);
                      return product;
                  })
                  .catch(err => {

@@ -53,6 +53,11 @@ main {
     padding: 1rem;
 }
 
+.card__image img {
+    width: 50%;
+    height: auto;
+}
+
 .centerInput {
     text-align: center;
     align-content: center;

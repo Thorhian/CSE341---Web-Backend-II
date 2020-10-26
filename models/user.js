@@ -9,7 +9,7 @@ class User {
     this.email = email;
     this.password = password;
     this.cart = cart; // {items: []}
-    this._id = id;
+    this._id = id ? new mongodb.ObjectId(id) : null
   }
 
   save() {

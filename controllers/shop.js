@@ -1,4 +1,5 @@
 const Product = require('../models/product');
+const User = require('../models/user');
 
 exports.getProducts = (req, res, next) => {
     Product.fetchAll()
@@ -44,7 +45,7 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
-    req.user
+    req.session.user
        .getCart()
        .then(products => {
            res.render('pages/shop/cart', {
@@ -64,14 +65,19 @@ exports.postCart = (req, res, next) => {
     } else {
         console.log('Getting a null productID');
     }
+    console.log(req.session.user);
     Product.findById(prodId)
            .then(product => {
-               return req.user.addToCart(product);
+               const user = req.session.user;
+               user.addToCart(product);
            })
            .then(result => {
                console.log(result);
                res.redirect('/shop/cart');
-           });
+           })
+           .catch(err => {
+               console.log(err);
+           })
 };
 
 exports.postCartDeleteProduct = (req, res, next) => {

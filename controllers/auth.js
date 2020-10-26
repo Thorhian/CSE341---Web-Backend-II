@@ -22,7 +22,14 @@ exports.postLogin = (req, res, next) => {
                 if(userFromDB.name == inputUsername) {
                     bcrypt.compare(inputPassword, userFromDB.password, (err, result) => {
                         if(result == true) {
-                            req.session.user = userFromDB;
+                            const userSession = new User(
+                                userFromDB.name,
+                                userFromDB.email,
+                                userFromDB.password,
+                                userFromDB.cart,
+                                userFromDB._id
+                            )
+                            req.session.user = userSession;
                             res.redirect('/shop')
                         } else {
                             res.redirect('/auth/login');
@@ -40,6 +47,11 @@ exports.postLogin = (req, res, next) => {
         })
         .catch(err => console.log(err));
 };
+
+exports.getLogout = (req, res, next) => {
+    req.session.destroy();
+    res.redirect('/shop');
+}
 
 exports.getCreateUser = (req, res, next) => {
     res.render('pages/shop/createUser', {
