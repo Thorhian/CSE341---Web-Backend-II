@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const mongodb = require('mongodb');
 const getDb = require('../util/database').getDb;
 
@@ -71,6 +73,12 @@ class Product {
             .catch(err => {
                 console.log(err);
             });
+    }
+
+    static grabExtraJSONData(callback) {
+        console.log(__dirname);
+        // const fileContents = fs.readFile(__dirname)
+        fs.readFile(path.join(__dirname, 'products.json'), callback);
     }
 };
 

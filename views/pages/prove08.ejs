@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/proveAssigns.css" />
+  </head>
+  <body class="bodyMain">
+    <header class="proveAssigns__header">
+      <nav class="proveAssigns__nav">
+        <div>
+          <h3> Prove 08 </h3>
+        </div>
+      </nav>
+    </header>
+    <main>
+
+    <div id="shopItems">
+        <button onclick="getProducts(1)"> Get Products </button>
+    </div>
+
+    </main>
+  </body>
+</html>
+<script>
+ function getProducts(page) {
+
+     const shopItems = document.getElementById("shopItems");
+
+     fetch('/prove08/getProducts?page=' + page.toString(), {
+         method: 'POST'
+     })
+         .then(response => response.json())
+         .then(data => {
+             data.forEach((product) => {
+                 let div = document.createElement('product');
+                 let header = document.createElement('productName');
+                 header.innerHTML = '<h3>' + product.title + '</h3>';
+                 div.appendChild(header);
+
+                 shopItems.appendChild(div);
+             })
+         })
+         .catch(err => console.log(err));
+
+ }
+</script>
